@@ -1,0 +1,34 @@
+<html>
+<head>
+
+</head>
+<body>
+    <script src="./blogscript.js"></script>
+
+    <div id="posteditor">
+
+    </div>
+    <! search header for searching object tags, titles etc.>
+    <h1>Search:</h1>
+    <div id="searchheader">
+        <label for="p-f-title">Title:</label>
+        <input type="text" id="p-f-title" name="p-f-title">
+        <br>
+        <label for="p-f-tags">Tags:</label>
+        <input type="text" id="p-f-tags" name="p-f-tags">
+        <br>
+        <br>
+        <button onclick="LoadPosts('postdisplay',document.getElementById('p-f-tags').value,document.getElementById('p-f-title').value)">Search</button>
+        <button onclick="LoadPosts('postdisplay')">Display all</button>
+    </div>
+    <hr>
+    <! div to display posts in>
+    <div id="postdisplay">
+    <script>LoadPosts("postdisplay")</script>
+    </div>
+    <! post editor that allows you to append new posts to the JSON file and POST them>
+    <div id="posteditor">
+
+    </div>
+</body>
+</html>

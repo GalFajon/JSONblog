@@ -1,0 +1,14 @@
+[
+    {
+        "title":"Annual pig race held in Glasgow.",
+        "thumbnail":"pigrace.jpg",
+        "content":"Hello world!",
+        "tags":"pigs, racing"
+    },
+    {
+        "title":"Mr. Business says business is going bad.",
+        "thumbnail":"badbusiness.jpg",
+        "content":"Hello world!",
+        "tags":"business, negativity" 
+    }
+]
