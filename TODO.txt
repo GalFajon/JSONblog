@@ -1,0 +1,2 @@
+-Add a file source parameter to the loadposts function (instead of automatically fetching from posts.json it fetches
+from the parameter name (LoadPosts("posts.json","","",""))))
