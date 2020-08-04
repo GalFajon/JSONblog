@@ -1,2 +1,10 @@
--Add a file source parameter to the loadposts function (instead of automatically fetching from posts.json it fetches
-from the parameter name (LoadPosts("posts.json","","",""))))
+-add post pages with links and an iframe to the overlay that displays the page
+
+-Add button to display overlay with post contents
+
+-style page with colour selectors for themes etc
+
+-figure out post addition into the .json file
+
+-add modes of display like grids, carousels etc. (especially image carousels that arent preloaded)
+	+ add a menu to select display method (class changing)

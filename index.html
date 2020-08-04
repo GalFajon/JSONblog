@@ -3,32 +3,31 @@
 
 </head>
 <body>
+    <script src="./blogscript_functions.js"></script>
     <script src="./blogscript.js"></script>
-
-    <div id="posteditor">
-
+    <div id="overlay" class="overlay">
     </div>
     <! search header for searching object tags, titles etc.>
     <h1>Search:</h1>
     <div id="searchheader">
-        <label for="p-f-title">Title:</label>
-        <input type="text" id="p-f-title" name="p-f-title">
-        <br>
-        <label for="p-f-tags">Tags:</label>
-        <input type="text" id="p-f-tags" name="p-f-tags">
-        <br>
-        <br>
-        <button onclick="LoadPosts('postdisplay',document.getElementById('p-f-tags').value,document.getElementById('p-f-title').value)">Search</button>
-        <button onclick="LoadPosts('postdisplay')">Display all</button>
+    <input type="text" id="p-f-search" name="p-f-search">
+    <br>
+    <input type="radio" onclick="sortPostsByDate('recent')" id="date-recent" name="date-sort">
+    <label for="date-recent">Most recent</label><br>
+    <input type="radio" onclick="sortPostsByDate('oldest')"id="date-oldest"" name="date-sort">
+    <label for="date-oldest">Oldest</label><br>  
+    <br>
+    <button id="searchbutton" disabled=true onclick="searchPosts(document.getElementById('p-f-search').value)">Search</button><!add search function>
+    <button id="displayallbutton" disabled=true onclick="loadPosts(GLOBAL_blogdata,'postdisplay','overlay')">Display all</button>
+    <br>
     </div>
     <hr>
     <! div to display posts in>
     <div id="postdisplay">
-    <script>LoadPosts("postdisplay")</script>
     </div>
     <! post editor that allows you to append new posts to the JSON file and POST them>
     <div id="posteditor">
-
+    <button onclick="">Post</button>
     </div>
 </body>
 </html>

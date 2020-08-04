@@ -1,50 +1,25 @@
-function LoadPosts(displayid, searchtags, searchtitle) {
-  fetch('posts.json')
-  .then(response => response.json())
-  .then(data => {
-      console.log(data)
-      let postdata = [];
-      let postdisplay = document.getElementById(displayid);
-      postdisplay.innerHTML="";
-      for (let i=0; i < data.length; i++) {
-      if ((data[i].title.includes(searchtitle) &&
-          searchtitle.length > 0) ||
-          (data[i].tags.includes(searchtags) &&
-          searchtags.length > 0) ||
-          searchtags == undefined ||
-          searchtitle == undefined) {
-      //loop through data and create an array of the various elements the page creates
-      postdata[i] = {
-          container : document.createElement("div"),
-          thumbnail : document.createElement("img"),
-          title : document.createElement("h1"),
-          content : document.createElement("p"),
-          tags : document.createElement("p")        
-      }
-      //assign the elements their classes and ids
-      postdata[i].container.className = "post-container";
-      postdata[i].title.className = "post-title";
-      postdata[i].thumbnail.className = "post-thumb";
-      postdata[i].content.className = "post-content";
-      postdata[i].tags.className = "post-tags";
+/*global functions*/
+var searchPosts; //function made for searching posts using the search bar and search button
+var sortPostsByDate;
 
-      postdata[i].container.id = "post-" + i + "-container";
-      postdata[i].title.id = "post-"+ i +"-title";
-      postdata[i].thumbnail.id = "post-"+ i +"-thumb";
-      postdata[i].content.id = "post-"+ i +"-content";
-      postdata[i].tags.id = "post-"+ i +"-tags";
-      //fill the elements with appropriate content
-      postdata[i].title.innerHTML = data[i].title;
-      postdata[i].thumbnail.src = data[i].thumbnail;
-      postdata[i].content.innerHTML = data[i].content;
-      postdata[i].tags.innerHTML = data[i].tags;
+//once everything but the DOM is loaded
+window.onload = function() {
+  //the function gets the blogdata and passes it a custom event generator
+  loadJSON("posts.json",function(blogdata){
+    const loadevent = new CustomEvent('JSONloaded', {detail : {key : blogdata}}); //the event is fired and passes blogdata to it
+    dispatchEvent(loadevent);
+  },[]);
+}
 
-      postdata[i].container.appendChild(postdata[i].title);
-      postdata[i].container.appendChild(postdata[i].thumbnail);
-      postdata[i].container.appendChild(postdata[i].content);
-      postdata[i].container.appendChild(postdata[i].tags);
-      //append the elements to the display
-      postdisplay.appendChild(postdata[i].container);
-    }
-    }
-})};
+window.addEventListener("JSONloaded", function(event) {
+  //get the event detail key which contains the blog data
+  let blogdata = event.detail.key;
+  //load the data
+  loadPosts(blogdata,'postdisplay','overlay');
+  //enable the search button
+  searchPosts = search.bindArgs(blogdata,loadPosts,['postdisplay','overlay']);
+  document.getElementById('searchbutton').disabled = false;
+  //enable the display all button
+  sortPostsByDate = sortByDate.bindArgs(blogdata,loadPosts,['postdisplay','overlay']);
+  document.getElementById('displayallbutton').disabled = false;
+});
